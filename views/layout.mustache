@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - My Personal Site</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/" class="{{#active}}{{#home}}active{{/home}}{{/active}}">Home</a></li>
+            <li><a href="/about" class="{{#active}}{{#about}}active{{/about}}{{/active}}">About</a></li>
+            <li><a href="/resume" class="{{#active}}{{#resume}}active{{/resume}}{{/active}}">Resume</a></li>
+            <li><a href="/blog" class="{{#active}}{{#blog}}active{{/blog}}{{/active}}">Blog</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {{> content}}
+    </main>
+
+    <footer>
+        <p>&copy; {{currentYear}} My Personal Site</p>
+    </footer>
+</body>
+</html> 
