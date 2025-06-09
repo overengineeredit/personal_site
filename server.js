@@ -11,11 +11,11 @@ const port = process.env.PORT || 3000;
 
 // Site configuration
 const siteConfig = {
-    name: process.env.SITE_OWNER_NAME || 'Peenaki',
-    title: process.env.SITE_TITLE || 'My Personal Site',
-    description: process.env.SITE_DESCRIPTION || 'Personal website with about, resume, and blog sections',
+    name: process.env.SITE_OWNER_NAME || 'Some dude who overengineers everything',
+    title: process.env.SITE_TITLE || 'An overengineered personal website',
+    description: process.env.SITE_DESCRIPTION || 'A personal website that is over-engineered and probably not needed',
     url: process.env.SITE_URL || 'https://overengineeredit.wtf',
-    image: process.env.SITE_IMAGE || '/images/og-image.jpg'
+    image: process.env.SITE_IMAGE || '/images/og-image.png'
 };
 
 // Security middleware
