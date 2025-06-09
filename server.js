@@ -23,11 +23,11 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
             scriptSrc: ["'self'"],
             imgSrc: ["'self'", "data:", "https:"],
             connectSrc: ["'self'"],
-            fontSrc: ["'self'", "https:"],
+            fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
             objectSrc: ["'none'"],
             mediaSrc: ["'self'"],
             frameSrc: ["'none'"],
@@ -60,31 +60,19 @@ app.use(limiter);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000').split(',');
 app.use(cors({
     origin: function(origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        
-        if (allowedOrigins.indexOf(origin) !== -1) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
     },
     methods: ['GET'],
-    optionsSuccessStatus: 200,
+    optionsSuccessStatus: 204,
     credentials: true
 }));
 
-// Security headers middleware
-app.use((req, res, next) => {
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    next();
-});
-
 // Register '.mustache' extension with The Mustache Express
 app.engine('mustache', mustacheExpress());
-
-// Set view engine and views directory
 app.set('view engine', 'mustache');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -106,14 +94,6 @@ app.use((req, res, next) => {
 });
 
 // Routes
-const renderPage = (template, title, active) => (req, res) => {
-    res.render(template, {
-        title,
-        active: { [active]: true },
-        currentYear: res.locals.currentYear
-    });
-};
-
 app.get('/', (req, res) => {
     res.render('index', {
         title: 'Home',
@@ -130,11 +110,7 @@ app.get('/', (req, res) => {
 app.get('/resume', (req, res) => {
     res.render('resume', {
         title: 'Resume',
-        active: { resume: true },
-        currentYear: res.locals.currentYear,
-        content: {
-            content: 'resume content goes here'
-        }
+        active: { resume: true }
     });
 });
 
@@ -142,37 +118,26 @@ app.get('/blog', (req, res) => {
     res.render('blog', {
         title: 'Blog',
         active: { blog: true },
-        currentYear: res.locals.currentYear,
         content: {
             content: 'blog content goes here'
         }
     });
 });
 
-// 404 handler - must come after all other routes
+// 404 handler
 app.use((req, res) => {
-    try {
-        res.status(404).render('404', {
-            title: '404 - Page Not Found',
-            currentYear: res.locals.currentYear
-        });
-    } catch (err) {
-        // If template rendering fails, send plain text
-        res.status(404).send('404 - Page Not Found');
-    }
+    res.status(404).render('404', {
+        title: '404 - Page Not Found'
+    });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    try {
-        res.status(err.status || 500).render('error', {
-            title: 'Error',
-            message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
-        });
-    } catch (renderErr) {
-        res.status(err.status || 500).send('Internal Server Error');
-    }
+    res.status(err.status || 500).render('error', {
+        title: 'Error',
+        message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
+    });
 });
 
 // Graceful shutdown
