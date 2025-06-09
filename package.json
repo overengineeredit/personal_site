@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step required - Node.js application'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'"
   },
   "dependencies": {
     "cors": "^2.8.5",
