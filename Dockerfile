@@ -1,8 +1,5 @@
 # Use Node.js LTS version
-FROM node:20-slim
-
-# Install curl for healthcheck
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+FROM node:22-alpine
 
 # Create app directory
 WORKDIR /app
@@ -17,7 +14,7 @@ RUN npm ci --only=production
 COPY . .
 
 # Create a non-root user
-RUN groupadd -r appuser && useradd -r -g appuser -s /bin/false appuser \
+RUN addgroup -S appuser && adduser -S -G appuser appuser \
     && chown -R appuser:appuser /app
 
 # Switch to non-root user
@@ -28,6 +25,7 @@ EXPOSE 3000
 
 # Set environment variables
 ENV NODE_ENV=production
+ENV PORT=3000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
