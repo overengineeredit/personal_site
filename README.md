@@ -1,6 +1,6 @@
 # Personal Website
 
-A simple personal website built with Node.js, Express, and Mustache templates. The site includes sections for About Me, Resume, and Blog.
+A modern personal website built with Node.js, Express, and Mustache templates, designed to run in Docker. The site includes sections for About Me, Resume, and Blog.
 
 ## Features
 
@@ -10,32 +10,41 @@ A simple personal website built with Node.js, Express, and Mustache templates. T
 - Blog section (ready for future content)
 - Clean and modern design
 - Security features (CORS, rate limiting, security headers)
-- Docker support for easy deployment
+- Containerized with Docker for easy deployment
 
 ## Project Structure
 
 ```
 personal_site/
-├── public/           # Static files (CSS, images, etc.)
-├── views/           # Mustache templates
-│   ├── layout.mustache    # Main layout template
-│   ├── index.mustache     # Home page
-│   ├── about.mustache     # About page
-│   ├── resume.mustache    # Resume page
-│   ├── blog.mustache      # Blog page
-│   └── content.mustache   # Content partial
-├── server.js        # Express server setup
-├── package.json     # Project dependencies
-└── README.md        # This file
+├── docker/                # Docker configuration
+│   ├── Dockerfile        # Docker build instructions
+│   └── .dockerignore    # Files to exclude from Docker build
+├── public/               # Static files
+│   ├── css/             # Stylesheets
+│   │   └── style.css    # Main stylesheet
+│   └── images/          # Image assets
+├── views/                # Mustache templates
+│   ├── partials/        # Reusable template parts
+│   │   ├── header.mustache
+│   │   └── footer.mustache
+│   ├── index.mustache   # Home page with About section
+│   ├── resume.mustache  # Resume page
+│   ├── blog.mustache    # Blog page
+│   ├── 404.mustache    # Not found page
+│   └── error.mustache   # Error page
+├── server.js            # Express server setup
+├── docker-compose.yml   # Docker compose configuration
+├── package.json         # Project dependencies
+├── env.template         # Environment variables template
+└── README.md           # Project documentation
 ```
 
 ## Prerequisites
 
-- Node.js (v14 or higher) for local development
-- npm (Node Package Manager)
-- Docker and Docker Compose (for containerized deployment)
+- Docker Desktop
+- Git
 
-## Local Development
+## Quick Start
 
 1. Clone the repository:
 ```bash
@@ -43,63 +52,64 @@ git clone [your-repository-url]
 cd personal_site
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Create a `.env` file from the template:
+2. Create environment file:
 ```bash
 cp env.template .env
 ```
 
-4. Start the development server:
+3. Build and start the container:
 ```bash
-npm run dev
+docker compose up -d
 ```
 
 The site will be available at http://localhost:3000
 
-## Docker Deployment
+## Docker Commands
 
-### Using Docker Compose (Recommended)
+### Basic Usage
 
-1. Build and start the container:
 ```bash
-docker-compose up -d
+# Start the application
+docker compose up -d
+
+# View logs
+docker compose logs -f
+
+# Stop the application
+docker compose down
+
+# Rebuild after code changes
+docker compose up -d --build
 ```
 
-2. View logs:
+### Maintenance
+
 ```bash
-docker-compose logs -f
+# Check container status
+docker ps
+
+# View resource usage
+docker stats
+
+# Access container shell
+docker compose exec web sh
+
+# View container logs with timestamps
+docker compose logs -f --timestamps
 ```
 
-3. Stop the container:
+### Troubleshooting
+
 ```bash
-docker-compose down
+# Restart the container
+docker compose restart
+
+# Force rebuild without cache
+docker compose build --no-cache
+
+# Check container health
+docker inspect personal_site-web-1 | grep Health
 ```
-
-### Using Docker Directly
-
-1. Build the image:
-```bash
-docker build -t personal-site .
-```
-
-2. Run the container:
-```bash
-docker run -d -p 3000:3000 --env-file .env --name personal-site personal-site
-```
-
-3. Stop the container:
-```bash
-docker stop personal-site
-```
-
-## Development
-
-- `npm run dev` - Starts the development server with auto-reload
-- `npm start` - Starts the production server
 
 ## Customization
 
@@ -117,6 +127,31 @@ docker stop personal-site
 - XSS protection
 - CSRF protection
 - Non-root Docker user
+- Container health checks
+- Resource limits and logging
+
+## Environment Variables
+
+Key environment variables in `.env`:
+
+```bash
+# Application Environment
+NODE_ENV=production
+
+# Server Configuration
+PORT=3000
+
+# Site Configuration
+SITE_OWNER_NAME=Your Name
+SITE_TITLE=Your Site Title
+SITE_DESCRIPTION=Your site description
+SITE_URL=https://yoursite.com
+
+# Security Configuration
+ALLOWED_ORIGINS=http://localhost:3000
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+```
 
 ## License
 
