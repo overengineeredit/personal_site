@@ -1,39 +1,105 @@
 {{> partials/header}}
 
 <div class="container">
-    <section class="resume">
-        <h1>Resume</h1>
-        
-        <section class="experience">
-            <h2>Experience</h2>
-            <div class="experience-item">
-                <h3>Job Title</h3>
-                <p class="company">Company Name</p>
-                <p class="date">Date Range</p>
+    <section class="resume-header">
+        <h1>{{resume.basics.name}}</h1>
+        <div class="contact-info">
+            <a href="mailto:{{resume.basics.email}}">{{resume.basics.email}}</a> |
+            <a href="{{resume.basics.linkedin}}" target="_blank">LinkedIn</a>
+        </div>
+        <div class="summary">
+            <p>{{resume.basics.summary}}</p>
+        </div>
+    </section>
+
+    <section class="skills">
+        <h2>Skills</h2>
+        <ul class="skills-list">
+            {{#resume.skills.areas}}
+            <li>{{.}}</li>
+            {{/resume.skills.areas}}
+        </ul>
+    </section>
+
+    <section class="experience">
+        <h2>Experience</h2>
+        {{#resume.experience}}
+        <div class="experience-item">
+            <div class="job-header">
+                <h3>{{title}}</h3>
+                <div class="company">
+                    {{#website}}<a href="https://{{website}}" target="_blank">{{company}}</a>{{/website}}
+                    {{^website}}{{company}}{{/website}}
+                    - {{location}}
+                </div>
+                <div class="period">{{period}}</div>
+            </div>
+            
+            {{#responsibilities.length}}
+            <div class="responsibilities">
+                <h4>Responsibilities:</h4>
                 <ul>
-                    <li>Key responsibility or achievement</li>
-                    <li>Another key responsibility or achievement</li>
+                {{#responsibilities}}
+                    <li>{{.}}</li>
+                {{/responsibilities}}
                 </ul>
             </div>
-        </section>
-
-        <section class="education">
-            <h2>Education</h2>
-            <div class="education-item">
-                <h3>Degree Name</h3>
-                <p class="institution">Institution Name</p>
-                <p class="date">Graduation Date</p>
+            {{/responsibilities.length}}
+            
+            {{#achievements.length}}
+            <div class="achievements">
+                <h4>Achievements:</h4>
+                <ul>
+                {{#achievements}}
+                    <li>{{.}}</li>
+                {{/achievements}}
+                </ul>
             </div>
-        </section>
+            {{/achievements.length}}
+        </div>
+        {{/resume.experience}}
+    </section>
 
-        <section class="skills">
-            <h2>Skills</h2>
-            <ul class="skills-list">
-                <li>Skill 1</li>
-                <li>Skill 2</li>
-                <li>Skill 3</li>
-            </ul>
-        </section>
+    <section class="education">
+        <h2>Education</h2>
+        <div class="education-item">
+            <h3>{{resume.education.degree}}</h3>
+            <div class="institution">{{resume.education.institution}}</div>
+            <div class="graduation">{{resume.education.graduationDate}}</div>
+            <div class="honors">
+                {{#resume.education.honors}}
+                {{.}}{{^last}} • {{/last}}
+                {{/resume.education.honors}}
+            </div>
+            <div class="concentrations">
+                Concentrations in {{#resume.education.concentrations}}{{.}}{{^last}} and {{/last}}{{/resume.education.concentrations}}
+            </div>
+            <div class="additional">
+                Additional coursework in {{#resume.education.additionalCoursework}}{{.}}{{^last}} and {{/last}}{{/resume.education.additionalCoursework}}
+            </div>
+        </div>
+    </section>
+
+    <section class="volunteering">
+        <h2>Volunteering</h2>
+        {{#resume.volunteering}}
+        <div class="volunteer-item">
+            <h3>{{role}}</h3>
+            <div class="organization">{{organization}}</div>
+            <div class="location-period">{{location}} • {{period}}</div>
+        </div>
+        {{/resume.volunteering}}
+    </section>
+
+    <section class="accomplishments">
+        <h2>Additional Accomplishments</h2>
+        {{#resume.additionalAccomplishments}}
+        <div class="accomplishment-item">
+            <h3>{{title}}</h3>
+            <div class="organization">{{organization}}</div>
+            <div class="location-date">{{location}} • {{date}}</div>
+        </div>
+        {{/resume.additionalAccomplishments}}
     </section>
 </div>
 

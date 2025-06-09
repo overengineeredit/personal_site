@@ -93,6 +93,9 @@ app.use((req, res, next) => {
     next();
 });
 
+// Load resume data
+const resumeData = require('./public/data/resume.json');
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index', {
@@ -110,7 +113,8 @@ app.get('/', (req, res) => {
 app.get('/resume', (req, res) => {
     res.render('resume', {
         title: 'Resume',
-        active: { resume: true }
+        active: { resume: true },
+        resume: resumeData
     });
 });
 

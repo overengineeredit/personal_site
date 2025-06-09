@@ -1,0 +1,83 @@
+PEENAK INAMDAR
+hello@bluequack.com
+https://www.linkedin.com/in/peenakinamdar/
+
+SUMMARY
+
+I’m seeking a Head of Engineering or Engineering Director position. My passion is to enhance team performance, deliver quality, and ensure system scalability through effective engineering practices, optimized developer experience, and evolving agile methodologies.
+
+Skills: Technical leadership and strategy | platform architecture & scalability | full-stack development (Python, Java, JavaScript, Docker, AWS, Google Cloud) | developer experience | team building & mentorship | agile & iterative workflows | cross-functional leadership | startup environments | product management
+
+EXPERIENCE
+
+Director of Engineering, Platform
+Renaissance Learning (renaissance.com), Wisconsin Rapids, WI (Remote), October 2022 – May 2025
+
+Responsibilities:
+* Directed the technical strategy, team structure, and staffing to execute a consolidation strategy by modernizing a legacy identity platform (.Net 4 and MS Services) to use modern tools and processes (Python, Golang, Postgres, Terraform, Docker, AWS: ECS, RDS, Lambda)
+* Managed 10 engineers focused on user identity, authentication, and authorization. Promoted several of them to more senior IC roles and management
+* Represented my teams to internal and external stakeholders, including product, security, and operations leadership, and supported ongoing SoC 2 Type 2, FERPA/CCPA,  compliance, and security audits
+Achievements:
+* Revamped the iterative product development practices to focus more on a user-centric approach, prioritizing system stability and developer experience (with observability and monitoring), and expanding the team’s performance monitoring and testing capabilities (DataDog, K6, Redline, JS)
+* Directed and mentored the team in scaling the identity platform to handle over 30K logins per minute from ~10K per minute (Ory Hydra, Golang, Postgres, Redline, K6)
+* Directed the development of a data ELT batch process to consolidate and match student and staff account entities across six products of over 24K, improving login experience (Python, dbt, PostgreSQL, Snowflake) 
+* Partnered with our client onboarding team and the AI/data sciences team to help them reduce user data matching effort by 90%, reducing a year of work to a few hours (dbt, Postgres, Retool)
+
+Head of Engineering
+The Muse (themuse.com), New York, NY (hybrid), October 2018 – July 2022
+
+Responsibilities:
+* Led the technical strategy, team structure, and agile processes to execute product strategy for an employer branding site and job board
+* Managed an engineering team of 16 engineers and managers, with five direct reports, and promoted over half of the team during my tenure
+Achievements:
+* Directed the re-architecture of the .com site to single-page applications (using Next.js and Node.js) powered by RESTful APIs (Python/FastAPI and CraftCMS for content management), reducing monthly AWS spend from $20k to $12k
+* Realigned application engineering to be focused on growth, job marketplace mechanics, client tooling, and platform/ ML & Data Analytics, leading to:
+   * Growing site readership to 7 million monthly unique visitors, up from 5 million
+   * 90% growth in job applications by improving the site SEO and user conversion rates
+   * Launching a new client onboarding tool and portal for clients, reducing client onboarding time by 60%, and achieving the client retention objective of over 90%
+
+Associate Director, Technology Management
+Ogilvy, Inc., New York, NY, August 2017 – Oct 2018
+
+* Led technology teams on client projects, working closely with creative leads and campaign producers to ensure that projects were successfully delivered. Clients included:  IBM, Lupus Foundation (http://befiercetakecontrol.org/), FEMA, and USAID
+* Directed 2-4 concurrent projects with teams of 2-5 technologists
+
+Sr. Engineering Manager, Monetization
+SoundCloud (soundcloud.com), New York, NY, May 2017 – July 2017
+
+* Led the Payments and Subscriptions team focused on the mobile platforms' user acquisition funnel and user features. Managed 5 mobile engineers
+* Developed a 3-month product roadmap, including on-app multivariate experiments, purchase funnel updates, and performance and maintenance updates.Led weekly backlog reviews with the product team, looking at conversion metrics, outcomes of experiments, and the level of effort (LOE) of maintenance activities
+
+Engineering Manager
+Pattern by Etsy (etsy.com/pattern), Brooklyn, NY, January 2017 – May 2017
+
+* Managed a team of 11 full-stack developers in building new features for Pattern by Etsy, an Etsy-powered e-shop storefront
+* Led an initiative with the creative, product, and marketing leads to utilize more user-centric practices using user stories
+
+Director of Engineering
+Huge, Inc. (hugeinc.com), Brooklyn, NY, August 2011 – January 2017
+
+* Directed technology teams on client engagements by working closely with other leads to ensure that projects were successfully integrated with clients and on time. Clients included:  Walmart (https://careers.walmart.com/), Google (https://blog.google and https://www.thinkwithgoogle.com), and Royal Caribbean (http://www.royalcaribbean.com)
+* Achievements included developing an approach for agile processes on client projects, a new engineer skills matrix, managing a new technologies lab, and creating a software architecture training course
+* Managed and mentored 20+ engineers across several disciplines, including client-side development (web and mobile), server-side development, DevOps, and quality assurance roles. I promoted over 10 members of the team during my tenure
+
+Solutions Architect
+Amplify (amplify.com), Brooklyn, NY, January 2009 – July 2011
+
+* Software architect and technology subject matter expert (SME) for consultative engagements at a K-12 software and solutions firm. 
+* Subject matter and industry expert for CCSSO’s Education Information Management Advisory Collaborative (EIMAC)
+
+EDUCATION
+
+B.S. Computer Science, University of Rochester, May 2000 with honors. Dean's List. Concentrations in Systems and AI. Additional coursework in Economics and Studio Arts (photography).
+
+VOLUNTEERING
+
+* PS 397 Spruce Street PTA, Webmaster, New York, NY, Fall 2024 - Current
+* The Meliora Collective Mentorship Program, Mentor, University of Rochester, Fall 2023 - Current
+* iMentor, Mentor, New York, NY, August 2014 - Spring 2018
+
+ADDITIONAL ACCOMPLISHMENTS
+
+* Executive Leadership Program, McKinsey, Remote, Summer 2024
+* Introduction to Programming Robots with Huge, Creative Mornings, New York, NY, October 16, 2015.
