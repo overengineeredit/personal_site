@@ -1,34 +1,40 @@
-{{> layout}}
-{{#content}}
-    <h1>Resume</h1>
-    <section>
-        <h2>Experience</h2>
-        <div class="experience">
-            <h3>Job Title</h3>
-            <p class="company">Company Name</p>
-            <p class="date">Date Range</p>
-            <ul>
-                <li>Key responsibility or achievement</li>
-                <li>Another key responsibility or achievement</li>
+{{> partials/header}}
+
+<div class="container">
+    <section class="resume">
+        <h1>Resume</h1>
+        
+        <section class="experience">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Job Title</h3>
+                <p class="company">Company Name</p>
+                <p class="date">Date Range</p>
+                <ul>
+                    <li>Key responsibility or achievement</li>
+                    <li>Another key responsibility or achievement</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Degree Name</h3>
+                <p class="institution">Institution Name</p>
+                <p class="date">Graduation Date</p>
+            </div>
+        </section>
+
+        <section class="skills">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li>Skill 1</li>
+                <li>Skill 2</li>
+                <li>Skill 3</li>
             </ul>
-        </div>
+        </section>
     </section>
+</div>
 
-    <section>
-        <h2>Education</h2>
-        <div class="education">
-            <h3>Degree Name</h3>
-            <p class="institution">Institution Name</p>
-            <p class="date">Graduation Date</p>
-        </div>
-    </section>
-
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li>Skill 1</li>
-            <li>Skill 2</li>
-            <li>Skill 3</li>
-        </ul>
-    </section>
-{{/content}} 
+{{> partials/footer}} 

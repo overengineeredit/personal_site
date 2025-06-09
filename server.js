@@ -9,6 +9,15 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Site configuration
+const siteConfig = {
+    name: process.env.SITE_OWNER_NAME || 'Peenaki',
+    title: process.env.SITE_TITLE || 'My Personal Site',
+    description: process.env.SITE_DESCRIPTION || 'Personal website with about, resume, and blog sections',
+    url: process.env.SITE_URL || 'https://overengineeredit.wtf',
+    image: process.env.SITE_IMAGE || '/images/og-image.jpg'
+};
+
 // Security middleware
 app.use(helmet({
     contentSecurityPolicy: {
@@ -54,10 +63,10 @@ app.use(cors({
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         
-        if (allowedOrigins.includes(origin)) {
+        if (allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
-            callback(null, false);
+            callback(new Error('Not allowed by CORS'));
         }
     },
     methods: ['GET'],
@@ -67,8 +76,6 @@ app.use(cors({
 
 // Security headers middleware
 app.use((req, res, next) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-XSS-Protection', '1; mode=block');
     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
     next();
@@ -77,7 +84,7 @@ app.use((req, res, next) => {
 // Register '.mustache' extension with The Mustache Express
 app.engine('mustache', mustacheExpress());
 
-// Set up view engine
+// Set view engine and views directory
 app.set('view engine', 'mustache');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -90,7 +97,11 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 // Common data middleware for all routes
 app.use((req, res, next) => {
-    res.locals.currentYear = new Date().getFullYear();
+    res.locals = {
+        ...res.locals,
+        currentYear: new Date().getFullYear(),
+        site: siteConfig
+    };
     next();
 });
 
@@ -103,15 +114,15 @@ const renderPage = (template, title, active) => (req, res) => {
     });
 };
 
-app.get('/', renderPage('index', 'Home', 'home'));
-
-app.get('/about', (req, res) => {
-    res.render('about', {
-        title: 'About Me',
-        active: { about: true },
-        currentYear: res.locals.currentYear,
+app.get('/', (req, res) => {
+    res.render('index', {
+        title: 'Home',
+        active: { home: true },
         content: {
-            content: 'About Me goes here'
+            about: {
+                background: 'Add your background information here.',
+                interests: 'Add your interests and hobbies here.'
+            }
         }
     });
 });
@@ -157,11 +168,9 @@ app.use((err, req, res, next) => {
     try {
         res.status(err.status || 500).render('error', {
             title: 'Error',
-            message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error',
-            currentYear: res.locals.currentYear
+            message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
         });
     } catch (renderErr) {
-        // If template rendering fails, send plain text
         res.status(err.status || 500).send('Internal Server Error');
     }
 });
@@ -175,6 +184,7 @@ process.on('SIGTERM', () => {
     });
 });
 
+// Start the server
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 }); 

@@ -1,5 +1,17 @@
-{{> layout}}
-{{#content}}
-    <h1>Blog</h1>
-    <p>Welcome to my blog! Posts will appear here soon.</p>
-{{/content}} 
+{{> partials/header}}
+
+<div class="container">
+    <section class="blog">
+        <h1>Blog</h1>
+        <div class="blog-content">
+            <p>Welcome to my blog! Posts will appear here soon.</p>
+            
+            <!-- Placeholder for future blog posts -->
+            <div class="blog-posts">
+                <!-- Blog posts will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+</div>
+
+{{> partials/footer}} 

@@ -3,15 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <meta name="description" content="{{site.description}}">
+    <meta name="theme-color" content="#3b82f6">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{site.url}}{{#path}}{{path}}{{/path}}">
+    <meta property="og:title" content="{{title}} - {{site.title}}">
+    <meta property="og:description" content="{{site.description}}">
+    <meta property="og:image" content="{{site.url}}{{site.image}}">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}} - {{site.title}}">
+    <meta name="twitter:description" content="{{site.description}}">
+    <meta name="twitter:image" content="{{site.url}}{{site.image}}">
+    
+    <title>{{title}} - {{site.title}}</title>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="/" {{#active.home}}class="active"{{/active.home}}>Home</a></li>
-                <li><a href="/about" {{#active.about}}class="active"{{/active.about}}>About</a></li>
                 <li><a href="/resume" {{#active.resume}}class="active"{{/active.resume}}>Resume</a></li>
                 <li><a href="/blog" {{#active.blog}}class="active"{{/active.blog}}>Blog</a></li>
             </ul>
