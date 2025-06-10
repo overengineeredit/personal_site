@@ -96,16 +96,16 @@ app.use((req, res, next) => {
 // Load resume data
 const resumeData = require('./public/data/resume.json');
 
+// Load about data
+const aboutData = require('./public/data/about.json');
+
 // Routes
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'Home',
     active: { home: true },
     content: {
-      about: {
-        background: 'Add your background information here.',
-        interests: 'Add your interests and hobbies here.'
-      }
+      about: aboutData.about_me
     }
   });
 });

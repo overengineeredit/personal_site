@@ -4,6 +4,9 @@ FROM node:22-alpine
 # Create app directory
 WORKDIR /app
 
+# Install curl for health checks
+RUN apk add --no-cache curl
+
 # Copy package files first
 COPY package*.json ./
 
