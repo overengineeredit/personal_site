@@ -66,17 +66,7 @@
             <h3>{{resume.education.degree}}</h3>
             <div class="institution">{{resume.education.institution}}</div>
             <div class="graduation">{{resume.education.graduationDate}}</div>
-            <div class="honors">
-                {{#resume.education.honors}}
-                {{.}}{{^last}} • {{/last}}
-                {{/resume.education.honors}}
-            </div>
-            <div class="concentrations">
-                Concentrations in {{#resume.education.concentrations}}{{.}}{{^last}} and {{/last}}{{/resume.education.concentrations}}
-            </div>
-            <div class="additional">
-                Additional coursework in {{#resume.education.additionalCoursework}}{{.}}{{^last}} and {{/last}}{{/resume.education.additionalCoursework}}
-            </div>
+            <div class="details">{{resume.education.formattedText}}</div>
         </div>
     </section>
 

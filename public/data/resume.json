@@ -9,7 +9,7 @@
     "areas": [
       "Technical leadership and strategy",
       "Platform architecture & scalability",
-      "Full-stack development (Python, Java, JavaScript, Docker, AWS, Google Cloud)",
+      "Full-stack development\n(Python, Java, JavaScript, Docker, AWS, Google Cloud)",
       "Developer experience",
       "Team building & mentorship",
       "Agile & iterative workflows",
@@ -22,9 +22,9 @@
     {
       "title": "Director of Engineering, Platform",
       "company": "Renaissance Learning",
+      "website": "renaissance.com",
       "location": "Wisconsin Rapids, WI (Remote)",
       "period": "October 2022 – May 2025",
-      "website": "renaissance.com",
       "responsibilities": [
         "Directed the technical strategy, team structure, and staffing to execute a consolidation strategy by modernizing a legacy identity platform (.Net 4 and MS Services) to use modern tools and processes (Python, Golang, Postgres, Terraform, Docker, AWS: ECS, RDS, Lambda)",
         "Managed 10 engineers focused on user identity, authentication, and authorization. Promoted several of them to more senior IC roles and management",
@@ -40,9 +40,9 @@
     {
       "title": "Head of Engineering",
       "company": "The Muse",
+      "website": "themuse.com",
       "location": "New York, NY (hybrid)",
       "period": "October 2018 – July 2022",
-      "website": "themuse.com",
       "responsibilities": [
         "Led the technical strategy, team structure, and agile processes to execute product strategy for an employer branding site and job board",
         "Managed an engineering team of 16 engineers and managers, with five direct reports, and promoted over half of the team during my tenure"
@@ -68,9 +68,9 @@
     {
       "title": "Director of Engineering",
       "company": "Huge, Inc.",
+      "website": "hugeinc.com",
       "location": "Brooklyn, NY",
       "period": "August 2011 – January 2017",
-      "website": "hugeinc.com",
       "responsibilities": [
         "Directed technology teams on client engagements by working closely with other leads to ensure that projects were successfully integrated with clients and on time",
         "Achievements included developing an approach for agile processes on client projects, a new engineer skills matrix, managing a new technologies lab, and creating a software architecture training course",
@@ -88,9 +88,7 @@
     "degree": "B.S. Computer Science",
     "institution": "University of Rochester",
     "graduationDate": "May 2000",
-    "honors": ["with honors", "Dean's List"],
-    "concentrations": ["Systems", "AI"],
-    "additionalCoursework": ["Economics", "Studio Arts (photography)"]
+    "formattedText": "Graduated with honors, Dean's List.\n\nConcentrations in Systems and AI. Additional coursework in Economics and Studio Arts (photography)."
   },
   "volunteering": [
     {
@@ -116,7 +114,6 @@
     {
       "title": "Executive Leadership Program",
       "organization": "McKinsey",
-      "location": "Remote",
       "date": "Summer 2024"
     },
     {
