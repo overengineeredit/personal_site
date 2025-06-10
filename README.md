@@ -9,6 +9,7 @@ A modern personal website built with Node.js, Express, and Mustache templates, d
 - Resume section with experience, education, and skills
 - Blog section (ready for future content)
 - Clean and modern design
+- Google Tag Manager integration for analytics
 - Comprehensive security features:
   - Helmet.js for security headers
   - CORS protection
@@ -20,6 +21,12 @@ A modern personal website built with Node.js, Express, and Mustache templates, d
   - GitHub Actions workflow
   - Docker container builds
   - GitHub Container Registry integration
+- Comprehensive validation testing:
+  - Page accessibility checks
+  - GTM implementation validation
+  - Meta tags and SEO validation
+  - Content structure verification
+  - Navigation testing
 
 ## Project Structure
 
@@ -36,16 +43,19 @@ personal_site/
 ├── views/                # Mustache templates
 │   ├── partials/        # Reusable template parts
 │   │   ├── header.mustache
-│   │   └── footer.mustache
+│   │   ├── footer.mustache
+│   │   ├── google-tag-manager-head.mustache
+│   │   └── google-tag-manager-body.mustache
 │   ├── index.mustache   # Home page with About section
 │   ├── resume.mustache  # Resume page
 │   ├── blog.mustache    # Blog page
 │   ├── 404.mustache    # Not found page
 │   └── error.mustache   # Error page
+├── scripts/             # Utility scripts
+│   └── test-build.sh   # Build validation script
 ├── server.js            # Express server setup
 ├── Dockerfile           # Docker build configuration
 ├── .dockerignore        # Docker ignore rules
-├── .eslintrc.json      # ESLint configuration
 ├── package.json         # Project dependencies
 ├── env.template         # Environment variables template
 └── README.md           # Project documentation
@@ -86,12 +96,12 @@ npm run dev
 1. Build and run with Docker:
 ```bash
 docker build -t personal-site .
-docker run -p 3000:3000 personal-site
+docker run -p 3000:3000 -e GTM_ID=your-gtm-id personal-site
 ```
 
 Or using Docker Compose:
 ```bash
-docker compose up -d
+GTM_ID=your-gtm-id docker compose up -d
 ```
 
 The site will be available at http://localhost:3000
@@ -113,6 +123,9 @@ npm run lint:fix
 
 # Start production server
 npm start
+
+# Run build validation tests
+./scripts/test-build.sh
 ```
 
 ## Docker Commands
@@ -124,13 +137,13 @@ npm start
 docker build -t personal-site .
 
 # Run the container
-docker run -p 3000:3000 personal-site
+docker run -p 3000:3000 -e GTM_ID=your-gtm-id personal-site
 
 # Pull from GitHub Container Registry
 docker pull ghcr.io/[username]/personal-site:latest
 
 # Run from GitHub Container Registry
-docker run -p 3000:3000 ghcr.io/[username]/personal-site:latest
+docker run -p 3000:3000 -e GTM_ID=your-gtm-id ghcr.io/[username]/personal-site:latest
 ```
 
 ### Maintenance
@@ -154,6 +167,7 @@ The project uses GitHub Actions for continuous integration and deployment:
    - Runs linting checks
    - Executes test suite
    - Builds the application
+   - Validates site functionality
    - Builds Docker image
    - Pushes to GitHub Container Registry
 
@@ -161,13 +175,19 @@ The project uses GitHub Actions for continuous integration and deployment:
 - Node.js setup and dependency installation
 - Code linting with ESLint
 - Test execution with Jest
+- Build validation testing:
+  - Page accessibility checks
+  - GTM implementation validation
+  - Meta tags and SEO validation
+  - Content structure verification
+  - Navigation testing
 - Docker image build and push
 - Artifact upload for test coverage
 
 ## Security Features
 
 - Helmet.js security headers:
-  - Content Security Policy
+  - Content Security Policy (configured for GTM)
   - CORS policies
   - XSS protection
   - HSTS
@@ -191,35 +211,44 @@ NODE_ENV=production
 # Server Configuration
 PORT=3000
 
+# Analytics Configuration
+GTM_ID=your-gtm-id  # Google Tag Manager container ID
+
 # Site Configuration
 SITE_OWNER_NAME=Your Name
 SITE_TITLE=Your Site Title
 SITE_DESCRIPTION=Your site description
 SITE_URL=https://yoursite.com
-
-# Security Configuration
-ALLOWED_ORIGINS=http://localhost:3000
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX_REQUESTS=100
 ```
 
-## Testing
+## Build Validation Testing
 
-The project includes a comprehensive test suite using Jest:
+The project includes a comprehensive build validation script (`scripts/test-build.sh`) that tests:
 
-```bash
-# Run all tests
-npm test
+1. Page Accessibility:
+   - Homepage (/) accessibility
+   - Resume page (/resume) accessibility
+   - Blog page (/blog) accessibility
+   - 404 error handling
 
-# Run tests with coverage
-npm test -- --coverage
-```
+2. GTM Implementation:
+   - GTM head code presence and correctness
+   - GTM body (noscript) code presence
 
-Test coverage includes:
-- API endpoint testing
-- Error handling
-- Security middleware
-- Rate limiting functionality
+3. Meta Tags and SEO:
+   - Required meta tags presence
+   - OpenGraph tags implementation
+   - Twitter card tags implementation
+
+4. Content Structure:
+   - Template files existence
+   - Partial files presence
+   - File organization
+
+5. Navigation Structure:
+   - Navigation links presence
+   - Link correctness
+   - Active state implementation
 
 ## Contributing
 
