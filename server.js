@@ -15,7 +15,8 @@ const siteConfig = {
   title: process.env.SITE_TITLE || 'An overengineered personal website',
   description: process.env.SITE_DESCRIPTION || 'A personal website that is over-engineered and probably not needed',
   url: process.env.SITE_URL || 'https://overengineeredit.wtf',
-  image: process.env.SITE_IMAGE || '/images/og-image.png'
+  image: process.env.SITE_IMAGE || '/images/og-image.png',
+  ga4Id: process.env.GA4_ID || null
 };
 
 // Security middleware
@@ -24,9 +25,9 @@ app.use(helmet({
     directives: {
       defaultSrc: ['\'self\''],
       styleSrc: ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
-      scriptSrc: ['\'self\''],
-      imgSrc: ['\'self\'', 'data:', 'https:'],
-      connectSrc: ['\'self\''],
+      scriptSrc: ['\'self\'', 'https://www.googletagmanager.com', '\'unsafe-inline\''],
+      imgSrc: ['\'self\'', 'data:', 'https:', 'https://www.googletagmanager.com'],
+      connectSrc: ['\'self\'', 'https://www.google-analytics.com'],
       fontSrc: ['\'self\'', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
       objectSrc: ['\'none\''],
       mediaSrc: ['\'self\''],
@@ -104,18 +105,25 @@ app.get('/', (req, res) => {
   res.render('index', {
     title: 'Home',
     active: { home: true },
-    content: {
-      about: aboutData.about_me
-    }
+    content: aboutData.about_me
   });
 });
 
 app.get('/resume', (req, res) => {
-  res.render('resume', {
-    title: 'Resume',
-    active: { resume: true },
-    resume: resumeData
-  });
+  try {
+    console.log('Resume data:', resumeData);
+    res.render('resume', {
+      title: 'Resume',
+      active: { resume: true },
+      resume: resumeData
+    });
+  } catch (error) {
+    console.error('Error rendering resume:', error);
+    res.status(500).render('error', {
+      title: 'Error',
+      message: 'Failed to render resume page'
+    });
+  }
 });
 
 app.get('/blog', (req, res) => {
