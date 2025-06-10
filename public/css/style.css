@@ -164,6 +164,10 @@ h3 {
     padding: 1rem;
     border-radius: 0.5rem;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
 }
 
 .experience-item {
