@@ -1,6 +1,6 @@
 {
   "name": "personal-site",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Personal website with about, resume, and blog sections",
   "main": "server.js",
   "scripts": {
