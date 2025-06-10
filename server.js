@@ -16,7 +16,7 @@ const siteConfig = {
   description: process.env.SITE_DESCRIPTION || 'A personal website that is over-engineered and probably not needed',
   url: process.env.SITE_URL || 'https://overengineeredit.wtf',
   image: process.env.SITE_IMAGE || '/images/og-image.png',
-  ga4Id: process.env.GA4_ID || null
+  gtmId: process.env.GTM_ID || null
 };
 
 // Security middleware
@@ -27,11 +27,11 @@ app.use(helmet({
       styleSrc: ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
       scriptSrc: ['\'self\'', 'https://www.googletagmanager.com', '\'unsafe-inline\''],
       imgSrc: ['\'self\'', 'data:', 'https:', 'https://www.googletagmanager.com'],
-      connectSrc: ['\'self\'', 'https://www.google-analytics.com'],
+      connectSrc: ['\'self\'', 'https://*.google-analytics.com', 'https://www.google-analytics.com', 'https://stats.g.doubleclick.net'],
       fontSrc: ['\'self\'', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
       objectSrc: ['\'none\''],
       mediaSrc: ['\'self\''],
-      frameSrc: ['\'none\''],
+      frameSrc: ['\'self\'', 'https://www.googletagmanager.com'],
     },
   },
   crossOriginEmbedderPolicy: true,
