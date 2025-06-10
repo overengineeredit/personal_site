@@ -1,10 +1,12 @@
 /* Base styles */
 :root {
     --primary-color: #3b82f6;
-    --text-color: #1f2937;
-    --background-color: #ffffff;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
+    --text-color: #e5e7eb;
+    --background-color: #121212;
+    --gray-100: #1f2937;
+    --gray-200: #374151;
+    --card-background: #1a1a1a;
+    --hover-color: #4b5563;
 }
 
 body {
@@ -13,6 +15,7 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
+    background-color: var(--background-color);
 }
 
 .container {
@@ -23,7 +26,7 @@ body {
 
 /* Header & Navigation */
 header {
-    background-color: var(--background-color);
+    background-color: var(--card-background);
     border-bottom: 1px solid var(--gray-200);
     padding: 1rem 0;
 }
@@ -84,11 +87,11 @@ nav a.active {
 
 .button.primary {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-color);
 }
 
 .button.secondary {
-    background-color: var(--gray-100);
+    background-color: var(--card-background);
     color: var(--text-color);
 }
 
@@ -124,7 +127,7 @@ h3 {
 
 .feature-card {
     padding: 2rem;
-    background-color: var(--gray-100);
+    background-color: var(--card-background);
     border-radius: 0.5rem;
 }
 
@@ -135,20 +138,28 @@ h3 {
 }
 
 .resume-header h1 {
-    margin-bottom: 1rem;
-}
-
-.contact-info {
     margin-bottom: 1.5rem;
 }
 
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
 .contact-info a {
-    color: var(--primary-color);
+    background-color: var(--card-background);
+    color: var(--text-color);
     text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
 }
 
 .contact-info a:hover {
-    text-decoration: underline;
+    color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 .summary {
@@ -166,7 +177,7 @@ h3 {
 }
 
 .skills-list li {
-    background-color: var(--gray-100);
+    background-color: var(--card-background);
     padding: 1rem;
     border-radius: 0.5rem;
     text-align: center;
@@ -176,10 +187,10 @@ h3 {
     min-height: 80px;
 }
 
-.experience-item {
+.experience-item, .education-item, .volunteer-item, .accomplishment-item {
     margin-bottom: 3rem;
     padding: 2rem;
-    background-color: var(--gray-100);
+    background-color: var(--card-background);
     border-radius: 0.5rem;
 }
 
@@ -229,13 +240,6 @@ h3 {
     margin-bottom: 0.5rem;
 }
 
-.education-item {
-    background-color: var(--gray-100);
-    padding: 2rem;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-}
-
 .education-item h3 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
@@ -254,13 +258,6 @@ h3 {
 
 .honors, .concentrations, .additional {
     margin-top: 0.5rem;
-}
-
-.volunteer-item, .accomplishment-item {
-    background-color: var(--gray-100);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
 }
 
 .volunteer-item h3, .accomplishment-item h3 {
@@ -334,4 +331,19 @@ footer {
     .experience-item, .education-item, .volunteer-item, .accomplishment-item {
         padding: 1rem;
     }
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
 } 
