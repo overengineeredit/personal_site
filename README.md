@@ -1,262 +1,166 @@
 # Personal Website
 
-A modern personal website built with Node.js, Express, and Mustache templates, designed with security and best practices in mind. The site includes sections for About Me, Resume, and Blog, with comprehensive testing and CI/CD pipeline.
+A modern, secure, and analytics-enabled personal website built with Node.js, Express, and Mustache templates.
 
 ## Features
 
-- Responsive navigation bar
-- About Me section integrated into home page
-- Resume section with experience, education, and skills
-- Blog section (ready for future content)
-- Clean and modern design
-- Google Tag Manager integration for analytics
-- Comprehensive security features:
-  - Helmet.js for security headers
-  - CORS protection
-  - Rate limiting
-  - XSS protection
-- Automated testing and CI/CD:
-  - Jest test suite
-  - ESLint code quality
-  - GitHub Actions workflow
-  - Docker container builds
-  - GitHub Container Registry integration
-- Comprehensive validation testing:
-  - Page accessibility checks
-  - GTM implementation validation
-  - Meta tags and SEO validation
-  - Content structure verification
-  - Navigation testing
+- 🚀 Fast and lightweight Express.js server
+- 📊 Google Tag Manager integration for analytics
+- 🔒 Comprehensive security with Helmet.js
+- 🎨 Clean and responsive design
+- 📱 Mobile-friendly layout
+- 🔍 SEO optimized
+- 🧪 Comprehensive testing suite
+- 🐳 Docker support
+- 📈 Rate limiting for API protection
+- 🔄 CI/CD with GitHub Actions
 
 ## Project Structure
 
 ```
-personal_site/
-├── .github/               # GitHub configurations
-│   └── workflows/        # GitHub Actions workflows
-├── tests/                # Test files
-│   └── server.test.js   # Server endpoint tests
-├── public/               # Static files
-│   ├── css/             # Stylesheets
-│   │   └── style.css    # Main stylesheet
-│   └── images/          # Image assets
-├── views/                # Mustache templates
-│   ├── partials/        # Reusable template parts
-│   │   ├── header.mustache
+.
+├── assets/                 # Static assets and data files
+├── public/                 # Public static files
+│   ├── css/               # Stylesheets
+│   └── data/              # JSON data files
+├── views/                 # Mustache templates
+│   ├── partials/         # Reusable template parts
 │   │   ├── footer.mustache
+│   │   ├── google-tag-manager-body.mustache
 │   │   ├── google-tag-manager-head.mustache
-│   │   └── google-tag-manager-body.mustache
-│   ├── index.mustache   # Home page with About section
-│   ├── resume.mustache  # Resume page
-│   ├── blog.mustache    # Blog page
-│   ├── 404.mustache    # Not found page
-│   └── error.mustache   # Error page
+│   │   └── header.mustache
+│   ├── 404.mustache      # Not found page
+│   ├── blog.mustache     # Blog page template
+│   ├── error.mustache    # Error page
+│   ├── index.mustache    # Home page
+│   └── resume.mustache   # Resume page
+├── tests/                # Test files
 ├── scripts/             # Utility scripts
-│   └── test-build.sh   # Build validation script
-├── server.js            # Express server setup
-├── Dockerfile           # Docker build configuration
-├── .dockerignore        # Docker ignore rules
-├── package.json         # Project dependencies
-├── env.template         # Environment variables template
-└── README.md           # Project documentation
+├── .github/             # GitHub configuration
+│   └── workflows/       # GitHub Actions workflows
+├── .eslintrc.json      # ESLint configuration
+├── .dockerignore       # Docker ignore rules
+├── docker-compose.yml  # Docker Compose configuration
+├── Dockerfile         # Docker build configuration
+├── env.template       # Environment variables template
+├── package.json      # Node.js dependencies and scripts
+└── server.js        # Main application file
 ```
 
 ## Prerequisites
 
-- Node.js 22.x or Docker
-- Git
+- Node.js >= 22.0.0
+- npm >= 10.0.0
+- Docker (optional, for containerization)
 
-## Quick Start
+## Environment Variables
 
-### Local Development
+Copy `env.template` to `.env` and configure the following variables:
+
+```bash
+PORT=3000                    # Server port
+SITE_NAME="Personal Site"    # Site name
+FOOTER_NAME="Your Name"      # Footer name
+NODE_ENV=development         # Environment (development/production)
+GTM_ID=GTM-XXXXXX          # Google Tag Manager ID
+```
+
+## Installation
 
 1. Clone the repository:
 ```bash
-git clone [your-repository-url]
-cd personal_site
+git clone <repository-url>
+cd personal-site
 ```
 
-2. Create environment file:
-```bash
-cp env.template .env
-```
-
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-4. Start the development server:
+3. Set up environment variables:
+```bash
+cp env.template .env
+# Edit .env with your configuration
+```
+
+## Development
+
+Start the development server:
 ```bash
 npm run dev
 ```
 
-### Docker Deployment
+The site will be available at `http://localhost:3000`
 
-1. Build and run with Docker:
+## Testing
+
+Run the test suite:
 ```bash
-docker build -t personal-site .
-docker run -p 3000:3000 -e GTM_ID=your-gtm-id personal-site
-```
-
-Or using Docker Compose:
-```bash
-GTM_ID=your-gtm-id docker compose up -d
-```
-
-The site will be available at http://localhost:3000
-
-## Development Commands
-
-```bash
-# Start development server with hot reload
-npm run dev
-
-# Run tests
 npm test
+```
 
-# Run linting
+## Linting
+
+The project uses ESLint with Node.js recommended rules. Run linting:
+```bash
 npm run lint
+```
 
-# Fix linting issues
+Fix automatic linting issues:
+```bash
 npm run lint:fix
-
-# Start production server
-npm start
-
-# Run build validation tests
-./scripts/test-build.sh
 ```
 
-## Docker Commands
+## Docker Deployment
 
-### Basic Usage
-
+1. Build the image:
 ```bash
-# Build the image
 docker build -t personal-site .
-
-# Run the container
-docker run -p 3000:3000 -e GTM_ID=your-gtm-id personal-site
-
-# Pull from GitHub Container Registry
-docker pull ghcr.io/[username]/personal-site:latest
-
-# Run from GitHub Container Registry
-docker run -p 3000:3000 -e GTM_ID=your-gtm-id ghcr.io/[username]/personal-site:latest
 ```
 
-### Maintenance
-
+2. Run with Docker Compose:
 ```bash
-# View logs
-docker logs -f [container-name]
-
-# Access container shell
-docker exec -it [container-name] sh
-
-# Check container health
-docker inspect [container-name]
+docker-compose up -d
 ```
 
-## CI/CD Pipeline
+## CI/CD
 
 The project uses GitHub Actions for continuous integration and deployment:
 
-1. On push to main or pull request:
-   - Runs linting checks
-   - Executes test suite
-   - Builds the application
-   - Validates site functionality
-   - Builds Docker image
-   - Pushes to GitHub Container Registry
-
-### Workflow Steps:
-- Node.js setup and dependency installation
-- Code linting with ESLint
-- Test execution with Jest
-- Build validation testing:
-  - Page accessibility checks
-  - GTM implementation validation
-  - Meta tags and SEO validation
-  - Content structure verification
-  - Navigation testing
-- Docker image build and push
-- Artifact upload for test coverage
+- Runs on push to main and pull requests
+- Performs linting and testing
+- Builds and tests Docker image
+- Validates Google Tag Manager implementation
+- Checks accessibility and SEO
+- Publishes Docker image to GitHub Container Registry
 
 ## Security Features
 
-- Helmet.js security headers:
-  - Content Security Policy (configured for GTM)
-  - CORS policies
-  - XSS protection
-  - HSTS
-  - and more
-- Rate limiting for API protection
-- CORS configuration with allowlist
-- Secure cookie settings
-- Docker security best practices:
-  - Non-root user
-  - Multi-stage builds
-  - Minimal base image
+- Helmet.js for secure HTTP headers
+- Content Security Policy (CSP) configuration
+- Rate limiting
+- CORS protection
+- XSS prevention
+- HSTS enabled
+- Frame protection
 
-## Environment Variables
+## Analytics
 
-Key environment variables in `.env`:
+The site uses Google Tag Manager for analytics:
+- GTM container setup in head and body
+- Configurable through environment variables
+- CSP rules configured for GTM and GA4
+- Privacy-focused implementation
 
-```bash
-# Application Environment
-NODE_ENV=production
+## License
 
-# Server Configuration
-PORT=3000
-
-# Analytics Configuration
-GTM_ID=your-gtm-id  # Google Tag Manager container ID
-
-# Site Configuration
-SITE_OWNER_NAME=Your Name
-SITE_TITLE=Your Site Title
-SITE_DESCRIPTION=Your site description
-SITE_URL=https://yoursite.com
-```
-
-## Build Validation Testing
-
-The project includes a comprehensive build validation script (`scripts/test-build.sh`) that tests:
-
-1. Page Accessibility:
-   - Homepage (/) accessibility
-   - Resume page (/resume) accessibility
-   - Blog page (/blog) accessibility
-   - 404 error handling
-
-2. GTM Implementation:
-   - GTM head code presence and correctness
-   - GTM body (noscript) code presence
-
-3. Meta Tags and SEO:
-   - Required meta tags presence
-   - OpenGraph tags implementation
-   - Twitter card tags implementation
-
-4. Content Structure:
-   - Template files existence
-   - Partial files presence
-   - File organization
-
-5. Navigation Structure:
-   - Navigation links presence
-   - Link correctness
-   - Active state implementation
+[Your License]
 
 ## Contributing
 
 1. Fork the repository
 2. Create your feature branch
-3. Run tests and linting
-4. Submit a pull request
-
-## License
-
-This project is open source and available under the MIT License. 
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request 

@@ -1,17 +1,36 @@
 {
   "env": {
     "node": true,
-    "es6": true,
+    "es2022": true,
     "jest": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended"
+  ],
   "parserOptions": {
-    "ecmaVersion": 2022
+    "ecmaVersion": 2022,
+    "sourceType": "module"
   },
+  "plugins": [
+    "node"
+  ],
   "rules": {
-    "indent": ["error", 4],
+    "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "always"]
-  }
+    "semi": ["error", "always"],
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "node/no-unsupported-features/es-syntax": ["error", {
+      "version": ">=22.0.0"
+    }]
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.js", "**/*.test.js"],
+      "rules": {
+        "node/no-unpublished-require": "off"
+      }
+    }
+  ]
 } 

@@ -60,8 +60,8 @@ app.use(limiter);
 // CORS configuration
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000').split(',');
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -150,14 +150,15 @@ app.use((err, req, res, next) => {
     title: 'Error',
     message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
   });
+  next(err);
 });
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
+  console.info('SIGTERM signal received: closing HTTP server');
   app.close(() => {
-    console.log('HTTP server closed');
-    process.exit(0);
+    console.info('HTTP server closed');
+    throw new Error('Server shutdown completed');
   });
 });
 
