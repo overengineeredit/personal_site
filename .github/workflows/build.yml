@@ -31,16 +31,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    
-    - name: Create env file
-      run: |
-        touch .env
-        echo "PORT=3000" >> .env
-        echo "SITE_NAME='Personal Site'" >> .env
-        echo "FOOTER_NAME='Your Name'" >> .env
-        echo "NODE_ENV=test" >> .env
-        echo "GTM_ID=${{ secrets.GTM_ID }}" >> .env
-        
+          
     - name: Install dependencies
       run: npm ci
       
@@ -60,7 +51,16 @@ jobs:
         npm start &
         sleep 5  # Wait for server to start
       env:
+        PORT: 3000
+        SITE_NAME: "Personal Site"
+        FOOTER_NAME: "Your Name"
+        NODE_ENV: test
         GTM_ID: GTM-TEST123
+        SITE_OWNER_NAME: "Some dude who overengineers everything"
+        SITE_TITLE: "An overengineered personal website"
+        SITE_DESCRIPTION: "A personal website that is over-engineered and probably not needed"
+        SITE_URL: "https://overengineeredit.wtf"
+        SITE_IMAGE: "/images/og-image.png"
 
     - name: Test page accessibility
       run: |
@@ -81,16 +81,22 @@ jobs:
         fi
 
     - name: Validate GTM implementation
+      if: env.GTM_ID != ''
       run: |
-        # Check GTM head code
-        if ! grep -q "googletagmanager.com/gtm.js" views/partials/google-tag-manager-head.mustache; then
-          echo "Error: GTM head code not found"
+        RESPONSE=$(curl -s "http://localhost:3000")
+        # Check GTM script inclusion
+        if ! echo "$RESPONSE" | grep -q "googletagmanager.com/gtm.js"; then
+          echo "Error: GTM script not found in page source"
           exit 1
         fi
-        
-        # Check GTM body code
-        if ! grep -q "googletagmanager.com/ns.html" views/partials/google-tag-manager-body.mustache; then
-          echo "Error: GTM body code not found"
+        # Check GTM noscript inclusion
+        if ! echo "$RESPONSE" | grep -q "googletagmanager.com/ns.html"; then
+          echo "Error: GTM noscript tag not found in page source"
+          exit 1
+        fi
+        # Verify GTM ID is being used
+        if ! echo "$RESPONSE" | grep -q "$GTM_ID"; then
+          echo "Error: Configured GTM_ID not found in page source"
           exit 1
         fi
 
@@ -117,7 +123,7 @@ jobs:
         done
         
         # Check required partial files
-        for FILE in "views/partials/google-tag-manager-head.mustache" "views/partials/google-tag-manager-body.mustache" "views/partials/header.mustache" "views/partials/footer.mustache"; do
+        for FILE in "views/partials/header.mustache" "views/partials/footer.mustache"; do
           if [ ! -f "$FILE" ]; then
             echo "Error: Missing partial file: $FILE"
             exit 1
@@ -125,7 +131,7 @@ jobs:
         done
         
         # Check required data files
-        for FILE in "public/data/about.json" "public/data/resume.json"; do
+        for FILE in "public/data/resume.json"; do
           if [ ! -f "$FILE" ]; then
             echo "Error: Missing data file: $FILE"
             exit 1

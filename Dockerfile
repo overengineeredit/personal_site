@@ -23,12 +23,23 @@ RUN addgroup -S appuser && adduser -S -G appuser appuser \
 # Switch to non-root user
 USER appuser
 
-# Expose port
-EXPOSE 3000
+# Set runtime environment variables with defaults
+ENV NODE_ENV=production \
+    PORT=3000 \
+    SITE_NAME="An Over-Engineered Personal Site" \
+    SITE_OWNER_NAME="Peenak Inamdar" \
+    SITE_TITLE="An Over-Engineered Personal Site" \
+    SITE_DESCRIPTION="Personal website of Peenak Inamdar, an engineering leader passionate about building and scaling high-performing teams and platforms." \
+    SITE_URL="https://overengineeredit.wtf" \
+    SITE_IMAGE="/images/og-image.png" \
+    FOOTER_NAME="Peenak Inamdar" \
+    GTM_ID="GTM-TEST123" \
+    RATE_LIMIT_WINDOW_MS=900000 \
+    RATE_LIMIT_MAX_REQUESTS=100 \
+    ALLOWED_ORIGINS="https://overengineeredit.wtf"
 
-# Set environment variables
-ENV NODE_ENV=production
-ENV PORT=3000
+# Expose port
+EXPOSE $PORT
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
